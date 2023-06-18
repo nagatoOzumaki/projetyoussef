@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const BACKEND_URL = 'http://localhost:6000';
+const BACKEND_URL = "http://localhost:3001";
 
 export const validateEmail = (email) => {
   return email.match(
@@ -12,12 +12,13 @@ export const validateEmail = (email) => {
 // Register User
 
 export const registerUser = (userData) => {
-  return axios.post(`${BACKEND_URL}/api/users/register`, userData, {
+  return axios
+    .post(`${BACKEND_URL}/api/users/register`, userData, {
       withCredentials: true,
     })
     .then((response) => {
-      if (response.statusText === 'OK') {
-        toast.success('User Registered successfully');
+      if (response.statusText === "OK") {
+        toast.success("User Registered successfully");
       }
       return response.data;
     })
@@ -36,9 +37,11 @@ export const registerUser = (userData) => {
 export const loginUser = async (userData) => {
   try {
     const response = await axios.post(
-      `${BACKEND_URL}`,
+      `${BACKEND_URL}/api/users/login`,
       userData,
-      { withCredentials: true }
+      {
+        withCredentials: true,
+      }
     );
     if (response.statusText === "OK") {
       toast.success("Login successfully");
